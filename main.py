@@ -57,9 +57,16 @@ async def on_interaction(interaction):
 @bot.command()
 async def start(ctx):
     user_id = ctx.author.id
-    if user_id not in user_responses:
+    if user_id in user_responses:
         user_responses[user_id] = 0
-        await send_question(ctx, user_id)
+        points[user_id] = 0
+        await ctx.send("Test yeniden başlatıldı!")
+    else:
+        user_responses[user_id] = 0
+        points[user_id] = 0
+        await ctx.send("Test başlatıldı! Sorulara başlayabilirsiniz.")
+
+    await send_question(ctx, user_id)
 
 bot.run(token)
 
