@@ -45,7 +45,12 @@ async def on_interaction(interaction):
         await interaction.response.send_message("Yanlış cevap!")
 
     # Görev 5 - soru sayacını ayarlayın
+    user_responses[user_id] += 1
     # Görev 6 - kullanıcı tüm soruları yanıtladıysa sınav sonucuyla ilgili bir mesaj gönderin. Aksi takdirde, bir sonraki soruyu gönderin
+    if user_responses[user_id] > len(quiz_questions) - 1:
+        await interaction.followup.send("Sınav bitti!")
+    else:
+        await send_question(interaction, user_id)
 
 @bot.command()
 async def start(ctx):
